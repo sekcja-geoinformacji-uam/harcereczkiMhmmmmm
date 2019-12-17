@@ -2,7 +2,7 @@ import csv, requests
 from urllib.parse import quote_plus
 
 places = {}
-with open('places.csv', 'r') as f:
+with open('data/places.csv', 'r') as f:
     reader = csv.reader(f, delimiter=',')
     next(reader)
     for row in reader:
@@ -21,20 +21,19 @@ URL_BASE = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?'\
     '&fields=formatted_address,name,geometry'\
     '&key={}'.format(apikey)
 
-i = 0
+#  i = 0
 geocoded = []
-with open('geocoded_address.csv', 'w') as f:
+with open('data/geocoded_address.csv', 'w') as f:
     csvwriter = csv.writer(f, delimiter=',')
     for name, address in places.items():
         print(address)
-        r=requests.get(URL_BASE, params={'input':address})
+        r = requests.get(URL_BASE, params={'input':address})
         data = r.json().get('candidates')
         if data:
             data = data[0]
-            new_address = data.get('formatted_address')
-            geometry = data.get('geometry').get('location')
-            new_name = data.get('name')
-            csvwriter.writerow([new_address, address, name, new_name, geometry])
+            new_address = data.get('formatted_address', 'BRAK')
+            geometry = data.get('geometry').get('location', 'BRAK')
+            new_name = data.get('name', 'BRAK')
+            csvwriter.writerow([name, address, new_address, new_name, geometry])
         else:
-            csvwriter.writerow(['BRAK', address, name, 'BRAK', 'BRAK'])
-
+            csvwriter.writerow([name, address, 'BRAK', 'BRAK', 'BRAK'])
