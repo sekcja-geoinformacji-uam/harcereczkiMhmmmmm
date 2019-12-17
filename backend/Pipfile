@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+flask = "==1.1.1"
+peewee = "*"
+shapely = {path = "C:/Users/Aleck/Desktop/Shapely-1.6.4.post2-cp27-cp27m-win32.whl"}
+gdal = "==2.4.0"
+numpy = "*"
+osgeo = "*"
+
+[requires]
+python_version = "3.8"
