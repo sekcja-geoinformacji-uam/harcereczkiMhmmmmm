@@ -1,39 +1,128 @@
 const punkty = {
   "type": "FeatureCollection",
-  "name": "alepunkty",
-  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-  "features": [
-  { "type": "Feature", "properties": { "id": 1 }, "geometry": { "type": "Point", "coordinates": [ 18.521865983562616, 52.588523646497229 ] } },
-  { "type": "Feature", "properties": { "id": 2 }, "geometry": { "type": "Point", "coordinates": [ 17.841949595552013, 53.370058103459442 ] } },
-  { "type": "Feature", "properties": { "id": 3 }, "geometry": { "type": "Point", "coordinates": [ 20.115724177973068, 51.768080556753695 ] } },
-  { "type": "Feature", "properties": { "id": 4 }, "geometry": { "type": "Point", "coordinates": [ 18.971454501754682, 51.583520931557182 ] } }
+  "name": "witam",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::3857"
+    }
+  },
+  "features": [{
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2339474.380505306180567, 6842912.12877878267318]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1883801.391977019142359, 6874097.27519899979234]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1884053.562972330721095, 6879560.98009742051363]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1882372.423003586009145, 6867708.943317769095302]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1875815.977125481003895, 6868465.456303704530001]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1899099.765692597487941, 6868633.570300579071045]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1861694.401388023979962, 6885697.140983339399099]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1879514.485056719742715, 6864935.062369340099394]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1894812.858772298088297, 6873592.933208376169205]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1871445.013206744333729, 6879645.037095857784152]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1867158.106286444701254, 6872584.249227129854262]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1887415.842909820610657, 6868045.17131151817739]
+      }
+    }
   ]
-  }
-console.log(ol.style)
+}
+
 
   var style = new ol.style.Style({
-    fill: new ol.style.Fill({
-      color: 'rgba(255, 255, 254, 0.6)'
-    }),
-    stroke: new ol.style.Stroke({
-      color: '#319FD3',
-      width: 1
-    }),
-    text: new ol.style.Text({
-      font: '12px Calibri,sans-serif',
+    image: new ol.style.Circle({
+      radius: 7,
       fill: new ol.style.Fill({
-        color: '#000'
+        color: 'black'
       }),
       stroke: new ol.style.Stroke({
-        color: '#fff',
-        width: 3
+        color: [255, 215, 151],
+        width: 2
       })
     })
   });
-  
-  var vectorLayer = new ol.layer.VectorLayer({
+
+  var vectorLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-      features: punkty.features
+      features: new ol.Collection(punkty)
     }),
     style: style
   });
@@ -45,7 +134,8 @@ console.log(ol.style)
         source: new ol.source.XYZ({
           url: 'https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FsaWFhYSIsImEiOiJjazJzd3cwNXowcGJmM2RudnNiaXYyOHU1In0.P2EP-Xewl1qp3onIMwTo7w'
         })
-      }), vectorLayer
+      }),
+      vectorLayer
     ],
     target: 'map',
     view: new ol.View({
