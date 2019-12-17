@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+}
+
+.wrapper {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.sidebar {
+  background-color: red;
+}
+
+.map {
+}
