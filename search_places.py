@@ -25,6 +25,7 @@ URL_BASE = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?'\
 geocoded = []
 with open('data/geocoded_address.csv', 'w') as f:
     csvwriter = csv.writer(f, delimiter=',')
+    csvwriter.writerow(['stara nazwa', 'stary adres', 'nowy adres', 'nowa nazwa', 'x', 'y'])
     for name, address in places.items():
         print(address)
         r = requests.get(URL_BASE, params={'input':address})
@@ -32,8 +33,11 @@ with open('data/geocoded_address.csv', 'w') as f:
         if data:
             data = data[0]
             new_address = data.get('formatted_address', 'BRAK')
-            geometry = data.get('geometry').get('location', 'BRAK')
+            geometry = data.get('geometry').get('location')
+            if geometry:
+                x = geometry.get('lat')
+                y = geometry.get('lng')
             new_name = data.get('name', 'BRAK')
-            csvwriter.writerow([name, address, new_address, new_name, geometry])
+            csvwriter.writerow([name, address, new_address, new_name, x, y])
         else:
             csvwriter.writerow([name, address, 'BRAK', 'BRAK', 'BRAK'])
