@@ -1,2 +1,2 @@
 # harcereczkiMhmmmmm
-Harcerzeczki only +7.5/10
+Harcerzeczki only +7/10
