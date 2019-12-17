@@ -2,7 +2,7 @@ import csv, requests
 from urllib.parse import quote_plus
 
 places = {}
-with open('places.csv', 'r') as f:
+with open('data/places.csv', 'r') as f:
     reader = csv.reader(f, delimiter=',')
     next(reader)
     for row in reader:
@@ -14,7 +14,7 @@ with open('places.csv', 'r') as f:
             continue
         places[(row[2])] = row[4]
 
-apikey = ''
+apikey = 'AIzaSyDSriI6SN8bT5iRzF-o59DgOue-Tf9_J00'
 
 URL_BASE = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?'\
     'inputtype=textquery'\
@@ -35,6 +35,14 @@ with open('geocoded_address.csv', 'w') as f:
             geometry = data.get('geometry').get('location')
             new_name = data.get('name')
             csvwriter.writerow([new_address, address, name, new_name, geometry])
-        else:
-            csvwriter.writerow(['BRAK', address, name, 'BRAK', 'BRAK'])
-
+            continue
+        r=requests.get(URL_BASE, params={'input':name})
+        data = r.json().get('candidates')
+        if data: 
+          data = data[0]
+          new_address = data.get('formatted_address')
+          geometry = data.get('geometry').get('location')
+          new_name = data.get('name')
+          csvwriter.writerow([new_address, address, name, new_name, geometry])
+          continue
+        csvwriter.writerow(['BRAK', address, name, 'BRAK', 'BRAK'])
