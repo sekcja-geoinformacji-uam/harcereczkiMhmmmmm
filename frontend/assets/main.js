@@ -13,7 +13,7 @@ console.log(ol.style)
 
   var style = new ol.style.Style({
     fill: new ol.style.Fill({
-      color: 'rgba(255, 255, 255, 0.6)'
+      color: 'rgba(255, 255, 254, 0.6)'
     }),
     stroke: new ol.style.Stroke({
       color: '#319FD3',
