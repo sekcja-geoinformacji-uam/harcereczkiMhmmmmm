@@ -21,19 +21,23 @@ URL_BASE = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?'\
     '&fields=formatted_address,name,geometry'\
     '&key={}'.format(apikey)
 
-i = 0
+#  i = 0
 geocoded = []
-with open('geocoded_address.csv', 'w') as f:
+with open('data/geocoded_address.csv', 'w') as f:
     csvwriter = csv.writer(f, delimiter=',')
+    csvwriter.writerow(['stara nazwa', 'stary adres', 'nowy adres', 'nowa nazwa', 'x', 'y'])
     for name, address in places.items():
         print(address)
-        r=requests.get(URL_BASE, params={'input':address})
+        r = requests.get(URL_BASE, params={'input':address})
         data = r.json().get('candidates')
         if data:
             data = data[0]
-            new_address = data.get('formatted_address')
+            new_address = data.get('formatted_address', 'BRAK')
             geometry = data.get('geometry').get('location')
-            new_name = data.get('name')
+            if geometry:
+              x = geometry.get('lat')
+              y = geometry.get('lng')
+            new_name = data.get('name', 'BRAK')
             csvwriter.writerow([new_address, address, name, new_name, geometry])
             continue
         r=requests.get(URL_BASE, params={'input':name})
@@ -42,7 +46,10 @@ with open('geocoded_address.csv', 'w') as f:
           data = data[0]
           new_address = data.get('formatted_address')
           geometry = data.get('geometry').get('location')
-          new_name = data.get('name')
+          if geometry:
+              x = geometry.get('lat')
+              y = geometry.get('lng')
+          new_name = data.get('name', 'BRAK')
           csvwriter.writerow([new_address, address, name, new_name, geometry])
           continue
         csvwriter.writerow(['BRAK', address, name, 'BRAK', 'BRAK'])
