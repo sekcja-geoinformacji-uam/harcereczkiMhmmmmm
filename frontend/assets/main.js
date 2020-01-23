@@ -121,10 +121,13 @@ const punkty = {
   });
 
   var vectorLayer = new ol.layer.Vector({
+    name: "features",
     source: new ol.source.Vector({
-      features: new ol.Collection(punkty)
-    }),
-    style: style
+      url:
+        "https://api.mapbox.com/datasets/v1/p4trykj/ck5d02qdn00so2vqokg4i6h95/features?access_token=pk.eyJ1IjoicDR0cnlraiIsImEiOiJjazExeWNyN3cwankzM2JwNmNtOHgzNXg5In0.StjLw-qURyTLbAZKWxZl2g",
+      format: new ol.format.GeoJSON()
+    })
+    // style: style
   });
   
 
@@ -144,5 +147,58 @@ const punkty = {
     })
   });
 
+  function getProp(feature) {
+    return feature.getProperties()
+  }
 
 
+  function listEventHandler(e) {
+   console.log(e)
+   const {target} = e
+   const [name, id] = target.id.split('@')
+   if(name === 'list__btn--zoom') {
+    zoomToFeatureByID(id)
+   } else if(name === 'list__btn--info') {
+     openInfo(id)
+   }
+  }
+
+  function zoomToFeatureByID(id) {
+    const feature = vectorLayer.getSource().getFeatures().find(function (feature) {
+      return feature.get('JPT_NAZWA_') == id 
+    })
+    const geomExtent = feature.getGeometry().getExtent()
+    map.getView().fit(geomExtent, {duration: 1000})
+    console.log(feature);
+    console.log(id)
+  }
+
+  function newElem(feature) {
+    console.log(feature);
+    const listEl = document.createElement("li");
+    listEl.innerHTML = `<span>${feature.JPT_NAZWA_}</span> 
+    <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}">Pokaż na mapie</button>
+    <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}">Pokaż więcej</button>`
+    // const listCont = document.createElement("span")
+    // listEl.appendChild("span")
+    document.getElementsByClassName("list")[0].appendChild(listEl);
+    
+  }
+
+  map.once('rendercomplete', function(event) {
+    const features = vectorLayer.getSource().getFeatures();
+    const simpleFeatures = features.map(getProp)
+    simpleFeatures.forEach(newElem)
+    document.getElementsByClassName("list")[0].addEventListener('click', e => {
+      listEventHandler(e)
+    })
+  console.log(features)
+  console.log(simpleFeatures)
+});
+
+
+
+
+// features.features.forEach(element => {
+//   console.log(element)
+// });

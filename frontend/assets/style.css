@@ -21,15 +21,13 @@ body {
 position: static;
 }
 
-.map {
-
-}
-}
-
-
-
 
 .map {
   width: 100%;
   height: 100%;
+}
+
+.btn.btn-light {
+  width: fit-content;
+  font-size: 0.8rem;
 }
