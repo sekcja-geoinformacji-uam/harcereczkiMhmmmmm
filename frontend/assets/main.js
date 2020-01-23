@@ -106,6 +106,31 @@ const punkty = {
   ]
 }
 
+/*let zhpData = [];
+
+let zhpData = loadTableData();
+
+function loadTableData(zhpData) {
+  const tableBody = document.getElementById("data/geocoded_address.csv");
+  let dataHtml = '';
+
+  for(let dane of zhpData) {
+    dataHtml += `<tr><td></td><td></td></tr>`;
+  }
+  console.log(dataHtml)
+
+  tableBody.innerHTML = dataHtml;
+}
+
+
+window.onload = () => {
+  loadTableData(zhpData);
+};
+
+loadTableData(zhpData);
+
+
+*/
 
   var style = new ol.style.Style({
     image: new ol.style.Circle({
@@ -122,11 +147,39 @@ const punkty = {
 
   var vectorLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-      features: new ol.Collection(punkty)
+      features: new ol.Collection()
     }),
     style: style
   });
   
+  var vectorLayer2 = new ol.layer.Vector({
+    source: new ol.source.Vector({
+      url:'https://api.mapbox.com/datasets/v1/p4trykj/ck5d02qdn00so2vqokg4i6h95/features?access_token=pk.eyJ1IjoicDR0cnlraiIsImEiOiJjazExeWNyN3cwankzM2JwNmNtOHgzNXg5In0.StjLw-qURyTLbAZKWxZl2g',
+      format: new ol.format.GeoJSON(),
+      features: new ol.Collection()
+    }),
+  });
+
+  var container = document.getElementById('popup');
+  var content = document.getElementById('popup-content');
+  var closer = document.getElementById('popup-closer');
+
+  var overlay = new ol.Overlay({
+    element: container,
+    autoPan: true,
+    autoPanAnimation: {
+    duration: 250
+    }
+  });
+
+  /*
+  closer.onclick = function() {
+    overlay.setPosition(undefined);
+    closer.blur();
+    return false;
+  };
+  */
+
 
   var map = new ol.Map({
     layers: [
@@ -135,7 +188,8 @@ const punkty = {
           url: 'https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FsaWFhYSIsImEiOiJjazJzd3cwNXowcGJmM2RudnNiaXYyOHU1In0.P2EP-Xewl1qp3onIMwTo7w'
         })
       }),
-      vectorLayer
+      vectorLayer,
+      vectorLayer2
     ],
     target: 'map',
     view: new ol.View({
@@ -144,5 +198,13 @@ const punkty = {
     })
   });
 
+  map.on('singleclick', function(evt) {
+    console.log(evt)
+    // var coordinate = evt.coordinate;
+      
+    // content.innerHTML = 'https://api.mapbox.com/datasets/v1/p4trykj/ck5d02qdn00so2vqokg4i6h95/features?access_token=pk.eyJ1IjoicDR0cnlraiIsImEiOiJjazExeWNyN3cwankzM2JwNmNtOHgzNXg5In0.StjLw-qURyTLbAZKWxZl2g';
+    // overlay.setPosition(coordinate);
+    // overlay.features(vectorLayer2)
+    });
 
 
