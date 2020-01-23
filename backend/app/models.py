@@ -44,21 +44,20 @@ class Camps(BaseModel):
 
 """
 
-# Chorągiew	
-Nazwa bazy/ośrodka	
-Województwo na terenie którego mieści się baza.	
-Adres bazy	
-Kontaktowy adres e-mail	
-Kontaktowy numer telefonu	
-Baza jest czynna:	
-Formy, które można zorganizować na bazie:	
-Położenie bazy:	
-Charakterystyka terenu	
-Dostępne formy zakwaterowania na bazie:	
-Zaplecze sanitarne:	
-Usługi bazy:	
-Możliwości programowe bazy:	
-Inne	
-ostateczna_x	ostateczna_y
+'Chorągiew' : 'banner',
+'Nazwa bazy/ośrodka' : name,
+'Województwo na terenie którego mieści się baza.':'province',
+'Adres bazy':'address',
+'Kontaktowy adres e-mail' : 'email',
+'Kontaktowy numer telefonu'	: 'phone',
+'Baza jest czynna:' : 'availability',
+'Formy, które można zorganizować na bazie:' : 'activities',
+'Położenie bazy:' : 'location',
+'Charakterystyka terenu':'terrain',
+'Dostępne formy zakwaterowania na bazie:':'accomodation',
+'Zaplecze sanitarne:':'sanitary',
+'Usługi bazy:':'base_features',
+'Możliwości programowe bazy:':'possibilities',
+'Inne':'other'	
 
 """

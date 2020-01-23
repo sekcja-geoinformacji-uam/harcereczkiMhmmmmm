@@ -1,14 +1,17 @@
+import os
 from flask import Flask, render_template
+from flask_cors import CORS
 
-from .models import database, Camps
+from .config import config
+from .models import database
+from .tools import create_table
 
-def create_app(config_name):
+def create_app(config_name='development'):
     ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
     os.chdir(ROOT_DIR)
-
     app = Flask(__name__, template_folder='../../frontend', static_folder='../../frontend/assets')
 
-    # CORS(app)
+    CORS(app)
     app.config.from_object(config[config_name])
 
     try:
@@ -25,10 +28,21 @@ def create_app(config_name):
         password=app.config['DBPASS'],
         port=app.config['DBPORT']
         )
+    create_table(database)
+
+    app.database = database
+
+    @app.after_request
+    def after(response):
+        if not database.is_closed():
+            database.close()
+        return response
 
     @app.route('/suchodolski')
     def suchodolski_welcome():
         return render_template('index.html')
+
+    from .routes import mod_routes
+    app.register_blueprint(mod_routes)
+
     return app
-
-

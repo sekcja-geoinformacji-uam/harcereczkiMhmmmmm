@@ -1,5 +1,5 @@
 class Config:
-    SECRET_KEY = b'qvu2NpQ2Lsiz0rEtQN5HnyzGbgHgk8GRYoPPXQZysyF2U5EUs7yZJINqB7DoZNrQVKXVg8'
+    SECRET_KEY = b'gcrX2Gj5AGsXGbSGf6UgYR-hakK-i-9cbPbTOIUEObg'
 
     DBNAME = 'rdos_db'
     DBUSER = 'postgres'

@@ -8,10 +8,9 @@ verify_ssl = true
 [packages]
 flask = "==1.1.1"
 peewee = "*"
-shapely = {path = "C:/Users/Aleck/Desktop/Shapely-1.6.4.post2-cp27-cp27m-win32.whl"}
-gdal = "==2.4.0"
-numpy = "*"
-osgeo = "*"
+psycopg2 = "*"
+flask-cors = "*"
+shapely = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.6"
