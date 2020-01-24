@@ -235,7 +235,7 @@ loadTableData(zhpData);
     <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}">Pokaż więcej</button>`
     // const listCont = document.createElement("span")
     // listEl.appendChild("span")
-    document.getElementsByClassName("list")[0].appendChild(listEl);
+    document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].appendChild(listEl);
     
   }
 
@@ -243,7 +243,7 @@ loadTableData(zhpData);
     const features = vectorLayer.getSource().getFeatures();
     const simpleFeatures = features.map(getProp)
     simpleFeatures.forEach(newElem)
-    document.getElementsByClassName("list")[0].addEventListener('click', e => {
+    document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].addEventListener('click', e => {
       listEventHandler(e)
     })
   console.log(features)
@@ -264,3 +264,5 @@ loadTableData(zhpData);
 // features.features.forEach(element => {
 //   console.log(element)
 // });
+
+
