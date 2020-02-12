@@ -192,9 +192,9 @@ window.onload = () => {
    console.log(e)
    const {target} = e
    const [name, id] = target.id.split('@')
-   if(name === 'list__btn--zoom') {
+   if(name === 'list__btn--zoom' || name === 'map-icon') {
     zoomToFeatureByID(id)
-   } else if(name === 'list__btn--info') {
+   } else if(name === 'list__btn--info' || name === 'arrow-icon') {
      openInfo(id)
    }
   }
@@ -213,12 +213,11 @@ window.onload = () => {
     console.log(feature);
     const listEl = document.createElement("li");
     listEl.innerHTML = `<span>${feature.JPT_NAZWA_}</span> 
-    <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}"><i class="fas fa-map-marked-alt"></i></button>
-    <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}"><i class="fas fa-chevron-circle-down"></i></button>`
+    <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}"><i class="fas fa-map-marked-alt id="map-icon"></i></button>
+    <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}"><i class="fas fa-chevron-circle-down" id="arrow-icon"></i></button>`
     // const listCont = document.createElement("span")
     // listEl.appendChild("span")
     document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].appendChild(listEl);
-    
   }
 
   map.once('rendercomplete', function(event) {
@@ -231,6 +230,10 @@ window.onload = () => {
   console.log(features)
   console.log(simpleFeatures)
 });
+
+
+
+
 
 
   map.on('singleclick', function(evt) {
@@ -254,3 +257,15 @@ window.onload = () => {
 // });
 
 
+
+function hideList() {
+document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].style.display = "none"
+}
+
+
+function openInfo() {
+document.getElementsByClassName("info-wrapper")[0].style.display = "inline"
+// const infoList = document.createElement("li")
+// infoList.innerHTML = `blablabla`
+// document.getElementsByClassName("info-list")[0].appendChild(infoList)
+}
