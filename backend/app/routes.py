@@ -8,22 +8,23 @@ from shapely.geometry import asShape
 mod_routes = Blueprint('routes', __name__)
 
 fields_map = {
-    'Chorągiew' : 'banner',
-    'Nazwa bazy/ośrodka' : 'name',
-    'Województwo na terenie którego mieści się baza.':'province',
-    'Adres bazy':'address',
-    'Kontaktowy adres e-mail' : 'email',
+    'Chorągiew': 'banner',
+    'Nazwa bazy/ośrodka': 'name',
+    'Województwo na terenie którego mieści się baza.': 'province',
+    'Adres bazy': 'address',
+    'Kontaktowy adres e-mail': 'email',
     'Kontaktowy numer telefonu'	: 'phone',
-    'Baza jest czynna:' : 'availability',
-    'Formy, które można zorganizować na bazie:' : 'activities',
-    'Położenie bazy:' : 'location',
-    'Charakterystyka terenu':'terrain',
-    'Dostępne formy zakwaterowania na bazie:':'accommodation',
-    'Zaplecze sanitarne:':'sanitary',
-    'Usługi bazy:':'base_features',
-    'Możliwości programowe bazy:':'possibilities',
-    'Inne':'other'	
+    'Baza jest czynna:': 'availability',
+    'Formy, które można zorganizować na bazie:': 'activities',
+    'Położenie bazy:': 'location',
+    'Charakterystyka terenu': 'terrain',
+    'Dostępne formy zakwaterowania na bazie:': 'accommodation',
+    'Zaplecze sanitarne:': 'sanitary',
+    'Usługi bazy:': 'base_features',
+    'Możliwości programowe bazy:': 'possibilities',
+    'Inne': 'other'
 }
+
 
 @mod_routes.route('/features')
 def get_features():
@@ -33,23 +34,26 @@ def get_features():
     ).dicts()
     features = []
     for row in rs:
+        row.pop('geom')
         geom = row.pop('geometry')
         features.append({
-            "type":"Feature",
-            "id":row.get('id'),
-            "geometry":json.loads(geom),
-            "properties":row
+            "type": "Feature",
+            "id": row.get('id'),
+            "geometry": json.loads(geom),
+            "properties": row
         })
     return jsonify({
-        "features":features
+        "type": 'FeatureCollection',
+        "features": features
     })
+
 
 @mod_routes.route('/features', methods=['POST'])
 def post_features():
     data = request.get_json(force=True)
     features = data.get('features')
     if not features:
-        return jsonify({"success":False}), 400
+        return jsonify({"success": False}), 400
     feats_list = []
     for feature in features:
         row = {}
@@ -57,10 +61,10 @@ def post_features():
         row = {**replaced}
         row['geom'] = fn.ST_GeomFromEWKT(asShape(feature['geometry']).wkt)
         feats_list.append(row)
-    print(feats_list)
     with current_app.database.atomic():
         Camps.insert_many(feats_list).execute()
-    return jsonify({"resposne":True}), 401
+    return jsonify({"resposne": True}), 401
+
 
 def replace_keys(dict):
     new_dict = {}
