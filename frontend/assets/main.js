@@ -106,31 +106,14 @@ const punkty = {
   ]
 }
 
-/*let zhpData = [];
-
-let zhpData = loadTableData();
-
-function loadTableData(zhpData) {
-  const tableBody = document.getElementById("data/geocoded_address.csv");
-  let dataHtml = '';
-
-  for(let dane of zhpData) {
-    dataHtml += `<tr><td></td><td></td></tr>`;
-  }
-  console.log(dataHtml)
-
-  tableBody.innerHTML = dataHtml;
-}
 
 
 window.onload = () => {
   loadTableData(zhpData);
 };
 
-loadTableData(zhpData);
 
 
-*/
 
   var style = new ol.style.Style({
     image: new ol.style.Circle({
@@ -182,7 +165,6 @@ loadTableData(zhpData);
     return false;
   };
   */
-
 
   var map = new ol.Map({
     layers: [
@@ -252,12 +234,18 @@ loadTableData(zhpData);
 
 
   map.on('singleclick', function(evt) {
-    console.log(evt)
+    console.log(evt.pixel)
     // var coordinate = evt.coordinate;
       
     // content.innerHTML = 'https://api.mapbox.com/datasets/v1/p4trykj/ck5d02qdn00so2vqokg4i6h95/features?access_token=pk.eyJ1IjoicDR0cnlraiIsImEiOiJjazExeWNyN3cwankzM2JwNmNtOHgzNXg5In0.StjLw-qURyTLbAZKWxZl2g';
     // overlay.setPosition(coordinate);
     // overlay.features(vectorLayer2)
+    var clickVectorLayer2 = map.getFeaturesAtPixel(evt.pixel)[0].getProperties();
+    console.log(clickVectorLayer2)
+      // if (clickVectorLayer2 !== NULL) {
+      //   var info = clickVectorLayer2.get("features")
+      // }
+
     });
 
 
