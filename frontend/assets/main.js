@@ -231,8 +231,8 @@ loadTableData(zhpData);
     console.log(feature);
     const listEl = document.createElement("li");
     listEl.innerHTML = `<span>${feature.JPT_NAZWA_}</span> 
-    <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}">Pokaż na mapie</button>
-    <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}">Pokaż więcej</button>`
+    <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}"><i class="fas fa-map-marked-alt"></i></button>
+    <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}"><i class="fas fa-chevron-circle-down"></i></button>`
     // const listCont = document.createElement("span")
     // listEl.appendChild("span")
     document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].appendChild(listEl);

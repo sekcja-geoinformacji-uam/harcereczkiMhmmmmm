@@ -1,3 +1,9 @@
+:root {
+  --zhp-green: #84a311;
+  --zhp-dark-green: #718c0f;
+  }
+
+
 body {
   margin: 0;
   overflow: hidden;
@@ -8,7 +14,7 @@ body {
 }
 
 .sidebar {
-  position: absolute;
+  position: static;
   overflow: auto;
   }
 
@@ -16,10 +22,6 @@ body {
 .wrapper {
   display: grid;
   grid-template-columns: minmax(100px, 400px) auto;
-}
-
-.sidebar {
-position: static;
 }
 
 
@@ -33,29 +35,36 @@ position: static;
   font-size: 0.65rem;
 }
 
+
+
 .list-group-item.list-group-item-action {
   list-style-type: none;
   font-size: 1.1rem;
   margin-bottom: 0;
+  background-color: var(--zhp-dark-green);
 }
 
 
+.list-group-item-secondary.list-group-item-action:hover {
+  background-color: var(--zhp-dark-green) !important;
+}
+
 .list-group-item.list-group-item-action li {
-background: #e6e6ebd7;
+background: var(--zhp-green);
 padding: 10px 20px;
 margin: 5px 0;
 transition: .5s;
 border: 1px solid #DDDDDD;
+color: white;
 }
+
+.list-group-item.list-group-item-action:hover {
+  background: var(--zhp-dark-green);
+  }
 
 
 .list-group-item.list-group-item-action li:hover {
 transform: scale(1.06);
-background: #c8cbcf;
-}
-
-.list-group-item.list-group-item-action li:active {
-background: #545555;
 }
 
 
