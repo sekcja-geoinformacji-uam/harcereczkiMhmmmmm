@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, request, jsonify, current_app
-from peewee import fn
+from peewee import fn, DataError
 from .models import Camps
 from shapely.geometry import asShape
 
@@ -49,23 +49,20 @@ def get_features():
 
 
 @mod_routes.route('/features', methods=['POST'])
-def post_features():
+def post_feature():
     data = request.get_json(force=True)
-    features = data.get('features')
-    if not features:
-        return jsonify({"success": False}), 400
-    feats_list = []
-    for feature in features:
-        row = {}
-        replaced = replace_keys(feature.get('properties'))
-        row = {**replaced}
-        row['geom'] = fn.ST_GeomFromEWKT(asShape(feature['geometry']).wkt)
-        feats_list.append(row)
-    with current_app.database.atomic():
-        Camps.insert_many(feats_list).execute()
-    return jsonify({"resposne": True}), 401
-
-
+    if not data:
+        return jsonify({'message': 'Nie przesłano danych'}), 400
+    geometry = data.get('geometry')
+    if not geometry: 
+        return jsonify({'message': 'Nie przesłano geometrii'}), 400
+    try:
+        data['geom'] = fn.ST_GeomFromEWKT('SRID=%s;%s'%(2180, asShape(data.pop('geometry')).wkt))
+        new_feature = Camps.create(**data)
+    except DataError as de: 
+         return jsonify({'message': f'{e}'}), 400
+    return jsonify({'inserted': new_feature.id}), 400
+    
 def replace_keys(dict):
     new_dict = {}
     for key, value in dict.items():
