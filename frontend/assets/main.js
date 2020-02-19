@@ -108,9 +108,9 @@ const punkty = {
 
 
 
-window.onload = () => {
-  loadTableData(zhpData);
-};
+// window.onload = () => {
+//   loadTableData(zhpData);
+// };
 
 
 
@@ -210,7 +210,7 @@ window.onload = () => {
   }
 
   function newElem(feature) {
-    console.log(feature);
+    // console.log(feature);
     const listEl = document.createElement("li");
     listEl.innerHTML = `<span>${feature.JPT_NAZWA_}</span> 
     <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}"><i class="fas fa-map-marked-alt id="map-icon"></i></button>
@@ -220,15 +220,16 @@ window.onload = () => {
     document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].appendChild(listEl);
   }
 
+ let simpleFeatures
   map.once('rendercomplete', function(event) {
     const features = vectorLayer.getSource().getFeatures();
-    const simpleFeatures = features.map(getProp)
+   simpleFeatures = features.map(getProp)
     simpleFeatures.forEach(newElem)
     document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].addEventListener('click', e => {
       listEventHandler(e)
     })
-  console.log(features)
-  console.log(simpleFeatures)
+  // console.log(features)
+  // console.log(simpleFeatures)
 });
 
 
@@ -263,9 +264,30 @@ document.getElementsByClassName("list-group-item list-group-item-action list-gro
 }
 
 
-function openInfo() {
+
+function openInfo(feature) {
+// console.log(feature)
 document.getElementsByClassName("feature__wrapper")[0].style.display = "inline"
-// const infoList = document.createElement("li")
-// infoList.innerHTML = `blablabla`
-// document.getElementsByClassName("feature__info")[0].appendChild(infoList)
+document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].style.display = "none"
+  const baseName = simpleFeatures.find(function (simpleFeature) {
+  return simpleFeature.JPT_NAZWA_  == feature
+})
+// console.log(baseName)
+for (const property in baseName) {
+  if (property != "geometry") {
+    const baseElement = document.createElement("li")
+  baseElement.innerHTML = `${property}: ${baseName[property]}` 
+  document.getElementsByClassName("feature__info")[0].appendChild(baseElement)}
+}
+
+
+// const infoElement = document.createElement("li")
+// infoElement.innerHTML = `<span>${feature.JPT_NAZWA_}</span>`
+// document.getElementsByClassName("feature__info")[0].appendChild(infoElement)
+// simpleFeatures.forEach(newElem)
+// const features = vectorLayer.getSource().getFeatures();
+// const simpleFeatures = features.map(getProp)
+// simpleFeatures.forEach(newElem)
+// document.getElementsByClassName("feature__info")[0].appendChild(simpleFeatures)
+
 }
