@@ -67,7 +67,7 @@ color: white;
 transform: scale(1.06);
 }
 
-.info-wrapper {
+.feature__wrapper {
   display: none;
   position: absolute !important;
   top: 0;

@@ -264,8 +264,8 @@ document.getElementsByClassName("list-group-item list-group-item-action list-gro
 
 
 function openInfo() {
-document.getElementsByClassName("info-wrapper")[0].style.display = "inline"
+document.getElementsByClassName("feature__wrapper")[0].style.display = "inline"
 // const infoList = document.createElement("li")
 // infoList.innerHTML = `blablabla`
-// document.getElementsByClassName("info-list")[0].appendChild(infoList)
+// document.getElementsByClassName("feature__info")[0].appendChild(infoList)
 }
