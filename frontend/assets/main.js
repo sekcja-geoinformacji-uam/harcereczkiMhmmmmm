@@ -213,8 +213,8 @@ const punkty = {
     // console.log(feature);
     const listEl = document.createElement("li");
     listEl.innerHTML = `<span>${feature.JPT_NAZWA_}</span> 
-    <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}"><i class="fas fa-map-marked-alt id="map-icon"></i></button>
-    <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}"><i class="fas fa-chevron-circle-down" id="arrow-icon"></i></button>`
+    <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}"><i class="fa fa-map id="map-icon"></i></button>
+    <button class="btn btn-light" id="list__btn--info@${feature.JPT_NAZWA_}"><i class="fa fa-chevron-circle-down" id="arrow-icon"></i></button>`
     // const listCont = document.createElement("span")
     // listEl.appendChild("span")
     document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].appendChild(listEl);
@@ -278,16 +278,4 @@ for (const property in baseName) {
     const baseElement = document.createElement("li")
   baseElement.innerHTML = `${property}: ${baseName[property]}` 
   document.getElementsByClassName("feature__info")[0].appendChild(baseElement)}
-}
-
-
-// const infoElement = document.createElement("li")
-// infoElement.innerHTML = `<span>${feature.JPT_NAZWA_}</span>`
-// document.getElementsByClassName("feature__info")[0].appendChild(infoElement)
-// simpleFeatures.forEach(newElem)
-// const features = vectorLayer.getSource().getFeatures();
-// const simpleFeatures = features.map(getProp)
-// simpleFeatures.forEach(newElem)
-// document.getElementsByClassName("feature__info")[0].appendChild(simpleFeatures)
-
-}
+}}
