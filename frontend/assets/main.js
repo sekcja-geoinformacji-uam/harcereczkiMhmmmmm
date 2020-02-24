@@ -108,11 +108,6 @@ const punkty = {
 
 
 
-window.onload = () => {
-  loadTableData(zhpData);
-};
-
-
 
 
   var style = new ol.style.Style({
@@ -158,13 +153,13 @@ window.onload = () => {
     }
   });
 
-  /*
+  
   closer.onclick = function() {
     overlay.setPosition(undefined);
     closer.blur();
     return false;
   };
-  */
+  
 
   var map = new ol.Map({
     layers: [
@@ -176,6 +171,7 @@ window.onload = () => {
       vectorLayer,
       vectorLayer2
     ],
+    overlays: [overlay],
     target: 'map',
     view: new ol.View({
       center: [1884631.369399, 6874440.575856],
@@ -189,7 +185,6 @@ window.onload = () => {
 
 
   function listEventHandler(e) {
-   console.log(e)
    const {target} = e
    const [name, id] = target.id.split('@')
    if(name === 'list__btn--zoom' || name === 'map-icon') {
@@ -205,12 +200,9 @@ window.onload = () => {
     })
     const geomExtent = feature.getGeometry().getExtent()
     map.getView().fit(geomExtent, {duration: 1000})
-    console.log(feature);
-    console.log(id)
   }
 
   function newElem(feature) {
-    console.log(feature);
     const listEl = document.createElement("li");
     listEl.innerHTML = `<span>${feature.JPT_NAZWA_}</span> 
     <button  class="btn btn-light" id="list__btn--zoom@${feature.JPT_NAZWA_}"><i class="fas fa-map-marked-alt id="map-icon"></i></button>
@@ -227,8 +219,6 @@ window.onload = () => {
     document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].addEventListener('click', e => {
       listEventHandler(e)
     })
-  console.log(features)
-  console.log(simpleFeatures)
 });
 
 
@@ -237,24 +227,20 @@ window.onload = () => {
 
 
   map.on('singleclick', function(evt) {
-    console.log(evt.pixel)
-    // var coordinate = evt.coordinate;
-      
-    // content.innerHTML = 'https://api.mapbox.com/datasets/v1/p4trykj/ck5d02qdn00so2vqokg4i6h95/features?access_token=pk.eyJ1IjoicDR0cnlraiIsImEiOiJjazExeWNyN3cwankzM2JwNmNtOHgzNXg5In0.StjLw-qURyTLbAZKWxZl2g';
-    // overlay.setPosition(coordinate);
-    // overlay.features(vectorLayer2)
-    var clickVectorLayer2 = map.getFeaturesAtPixel(evt.pixel)[0].getProperties();
-    console.log(clickVectorLayer2)
-      // if (clickVectorLayer2 !== NULL) {
-      //   var info = clickVectorLayer2.get("features")
+  
+    // overlay.features(vectorLayer)
+    var coordinate = evt.coordinate;
+    const properties =  map.getFeaturesAtPixel(evt.pixel)[0].getProperties();
+    content.innerHTML =`Nazwa: ${properties.JPT_NAZWA_} <br>
+                        Organ: ${properties.JPT_ORGAN1} <br>
+                        ` 
+    overlay.setPosition(coordinate);
+      // if (vectorLayer !== null) {
+      // vectorLayer.view
+      // evt.view
       // }
 
     });
-
-
-// features.features.forEach(element => {
-//   console.log(element)
-// });
 
 
 
