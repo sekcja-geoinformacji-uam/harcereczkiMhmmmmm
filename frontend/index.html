@@ -31,16 +31,20 @@
   <div class="wrapper">
     <div class="sidebar">
       <div class="features__wrapper">
+        <button type="button" onclick="window">Dodaj nową bazę</button> 
         <ul class="list-group-item list-group-item-action list-group-item-secondary">
         </ul>
       </div>
-
-      <div class="feature__wrapper">
-        <ul class="feature__info">
-        </ul>
-      </div>
+     <div class="feature__wrapper">
+     <ul class="feature__info">
+     </ul>
+    </div>
     </div>
     <div id="map" class="map"></div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>Dane dotyczące bazy
+      <div id="popup-content"></div>
+    </div>
   </div>
   <div class="loader"></div>
 </body>
