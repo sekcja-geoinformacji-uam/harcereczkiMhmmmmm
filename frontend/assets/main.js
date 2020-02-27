@@ -237,9 +237,8 @@ const punkty = {
     // overlay.features(vectorLayer)
     var coordinate = evt.coordinate;
     const properties =  map.getFeaturesAtPixel(evt.pixel)[0].getProperties();
-    content.innerHTML =`Nazwa: ${properties.JPT_NAZWA_} <br>
-                        Organ: ${properties.JPT_ORGAN1} <br>
-                        ` 
+    content.innerHTML =`<span class="popup_content_text"> Nazwa: ${properties.JPT_NAZWA_} <br>
+                        Organ: ${properties.JPT_ORGAN1} <br> </span>` 
     overlay.setPosition(coordinate);
       // if (vectorLayer !== null) {
       // vectorLayer.view

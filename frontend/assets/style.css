@@ -1,13 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:400,500,600,700|Roboto:300,400,500&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Nunito|Nunito+Sans&display=swap');
+
+@font-face {
+  font-family: 'Avenir Next Regular';
+  src: url('assets/static/fonts/Avenir-Next-Font/AvenirNextLTPro-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Avenir Next Bold';
+  src: url('assets/static/fonts/Avenir-Next-Font/AvenirNextLTPro-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Avenir Next Demi';
+  src: url('assets/static/fonts/Avenir-Next-Font/AvenirNextLTPro-Demi.otf');
+}
+
 :root {
   --zhp-green: #84a311;
   --zhp-dark-green: #718c0f;
   --zhp-white: white;
+  --button-color: #546120;
   }
 
 
 body {
   margin: 0;
   overflow: hidden;
+  font-family: "Nunito Sans" !important;
 }
 
 .button {
@@ -31,26 +52,57 @@ body {
   grid-template-columns: minmax(100px, 400px) auto;
 }
 .ol-popup {
-  position: absolute;
-  background-color: var(--zhp-green);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  padding: 15px;
-  color: var(--zhp-white);
-  border-radius: 5px;
-  border: var(--zhp-dark-green);
-  bottom: 2px;
-  left: -50px;
-  min-width: 280px;
+    position: absolute;
+    background-color: #f5f9e5;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    padding: 0px;
+    background-color: var;
+    border-radius: 5px;
+    border: var(--zhp-dark-green);
+    bottom: 2px;
+    left: -50px;
+    min-width: 280px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    height: 18vh;
+    border: 2px solid #505050;
+    font-weight: 500;
+    color: #404040;
 }
+
+.popup_content_text {
+  display: flex;
+  margin-left: 7px;
+}
+
+.popup_header {
+  text-shadow: 1px 2px 3px #000000;
+  color: white;
+  margin-left: 3%;
+  text-transform: uppercase;
+}
+
+.popup_content {
+  background-color: #546120;
+  height: 40%;
+  display: flex;
+  font-size: 1.2em;
+  border-bottom: 2px groove #8e8e8e;
+  align-items: center;
+}
+
 .ol-popup-closer {
   text-decoration: none;
   position: absolute;
-  top: 2px;
+  top: 0px;
   right: 8px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: larger;
+  text-shadow: 1px 2px 3px #000000;
+  padding: 0;
 }
-.ol-popup-closer:after {
-  content: "✖";
-}
+
 .map {
   width: 100%;
   height: 100%;
@@ -62,12 +114,24 @@ body {
 }
 
 
+/* .ol-zoom.ol-unselectable.ol-control {
+background-color: var(--button-color);
+} */
+
+.ol-zoom-in {
+background-color: var(--button-color) !important;
+}
+
+.ol-zoom-out {
+  background-color: var(--button-color) !important;
+}
 
 .list-group-item.list-group-item-action {
   list-style-type: none;
   font-size: 1.1rem;
   margin-bottom: 0;
   background-color: var(--zhp-dark-green);
+  border: none;
 }
 
 
@@ -165,4 +229,12 @@ background: var(--zhp-green);
   font-size: 1.4em;
 }
 
+#add_base {
+  font-size: 1.1em;
+  background-color: var(--zhp-green);
+  color: white;
+  text-shadow: 1px 2px 3px #000000;
+  margin-left: 5%;
+  margin-top: 3%;
+}
 /* Scrollbar */
