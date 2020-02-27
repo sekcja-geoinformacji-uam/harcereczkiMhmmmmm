@@ -2,11 +2,11 @@ var style = new ol.style.Style({
   image: new ol.style.Circle({
     radius: 7,
     fill: new ol.style.Fill({
-      color: "black"
+      color: "#588463"
     }),
     stroke: new ol.style.Stroke({
-      color: [255, 215, 151],
-      width: 2
+      color: "black",
+      width: 1
     })
   })
 });
@@ -16,8 +16,8 @@ var vectorLayer = new ol.layer.Vector({
   source: new ol.source.Vector({
     url: "http://3.120.210.65:5000/features",
     format: new ol.format.GeoJSON()
-  })
-  // style: style
+  }),
+  style: style
 });
 
 var container = document.getElementById("popup");
