@@ -43,7 +43,7 @@ body {
 .sidebar {
   position: relative;
   overflow: auto;
-  background-color: var(--zhp-dark-green);
+  background-color: #343a40;
   }
 
 @media screen and (min-width: 650px) {
@@ -63,7 +63,7 @@ body {
     left: -50px;
     min-width: 280px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    height: 18vh;
+    height: fit-content;
     border: 2px solid #616161;
     font-weight: 500;
     color: #404040;
@@ -72,6 +72,7 @@ body {
 .popup_content_text {
   display: flex;
   margin-left: 7px;
+  background-color: white;
 }
 
 .popup_header {
@@ -82,7 +83,7 @@ body {
 }
 
 .popup_content {
-  background-color: #546120;
+  background-color: #343a40;
   height: 40%;
   display: flex;
   font-size: 1.2em;
@@ -130,18 +131,18 @@ background-color: rgba(61, 61, 61, 0.8) !important;
   list-style-type: none;
   font-size: 1.1rem;
   margin-bottom: 0;
-  background-color: var(--zhp-dark-green);
+  background-color: #343a40;
   border: none;
   margin-top: 1%;
 }
 
 
 .list-group-item-secondary.list-group-item-action:hover {
-  background-color: var(--zhp-dark-green) !important;
+  background-color: #343a40 !important;
 }
 
 .list-group-item.list-group-item-action li {
-background: var(--zhp-green);
+background-color: #343a40;
 padding: 10px 20px;
 margin: 5px 0;
 transition: .5s;
@@ -165,12 +166,12 @@ transform: scale(1.06);
   top: 0;
   height: 100%;
   width: 100%;
-  background-color: var(--zhp-dark-green);
+  background-color: #343a40;
   z-index: 9999;
 }
 
 .feature__info {
-  background-color: var(--zhp-green);
+  background-color: #343a40;
     list-style-type: none;
     color: white;
     font-size: 1.1rem;
@@ -185,13 +186,19 @@ transform: scale(1.06);
   margin: 5px 0;
   border: 1px solid #DDDDDD;
   transition: .5s;
-  background-color: var(--zhp-green);
+  background-color: #343a40;
   text-shadow: 1px 2px 3px #000000;
+  word-wrap: break-word;
+
 }
+
+.features__wrapper {
+  background-color: #343a40;
+} 
 
 
 .feature__info:hover {
-background: var(--zhp-green);
+background: #343a40;
 
 }
 
@@ -236,7 +243,7 @@ background: var(--zhp-green);
 
 #add_base {
   font-size: 1.1em;
-  background-color: var(--zhp-green);
+  background-color: #343a40;
   color: white;
   text-shadow: 1px 2px 3px #000000;
   margin-left: 5%;

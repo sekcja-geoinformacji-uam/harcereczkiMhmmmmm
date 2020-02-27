@@ -127,7 +127,7 @@ map.on("singleclick", function(evt) {
 
 function hideList() {
 document.getElementsByClassName("feature__wrapper")[0].style.display = "none"
-document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].style.display = "inline"
+document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].style.display = "block"
 }
 
 function openInfo(feature) {
@@ -151,3 +151,5 @@ function openInfo(feature) {
     }
   }
 }
+
+
