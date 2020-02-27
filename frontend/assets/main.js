@@ -250,7 +250,8 @@ const punkty = {
 
 
 function hideList() {
-document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].style.display = "none"
+document.getElementsByClassName("feature__wrapper")[0].style.display = "none"
+document.getElementsByClassName("list-group-item list-group-item-action list-group-item-secondary")[0].style.display = "inline"
 }
 
 
