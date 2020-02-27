@@ -116,8 +116,8 @@ map.on("singleclick", function(evt) {
   // overlay.features(vectorLayer)
   var coordinate = evt.coordinate;
   const properties = map.getFeaturesAtPixel(evt.pixel)[0].getProperties();
-  content.innerHTML = `<span class="popup_content_text"> Nazwa: ${properties.JPT_NAZWA_} <br>
-                        Organ: ${properties.JPT_ORGAN1} <br> </span>`;
+  content.innerHTML = `<span class="popup_content_text"> Nazwa: ${properties.name} <br>
+                        Adres: ${properties.address} <br> </span>`;
   overlay.setPosition(coordinate);
   // if (vectorLayer !== null) {
   // vectorLayer.view
@@ -139,7 +139,7 @@ function openInfo(feature) {
     "list-group-item list-group-item-action list-group-item-secondary"
   )[0].style.display = "none";
   const baseName = simpleFeatures.find(function(simpleFeature) {
-    return simpleFeature.JPT_NAZWA_ == feature;
+    return simpleFeature.name == feature;
   });
   // console.log(baseName)
   for (const property in baseName) {
