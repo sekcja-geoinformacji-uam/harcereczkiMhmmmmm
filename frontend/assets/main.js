@@ -1,15 +1,20 @@
 var style = new ol.style.Style({
-  image: new ol.style.Circle({
-    radius: 7,
-    fill: new ol.style.Fill({
-      color: "#588463"
-    }),
-    stroke: new ol.style.Stroke({
-      color: "black",
-      width: 1
-    })
+  image: new ol.style.Icon({
+    src: "./assets/icons/camping-tent1.svg",
+    scale: 0.06
+    // radius: 7,
+    // fill: new ol.style.Fill({
+    //   color: "#588463"
+    // }),
+    // stroke: new ol.style.Stroke({
+    //   color: "black",
+    //   width: 1
+    // })
   })
 });
+
+
+
 
 var vectorLayer = new ol.layer.Vector({
   name: "features",
@@ -82,13 +87,14 @@ function zoomToFeatureByID(id) {
 }
 
 function newElem(feature) {
-  // console.log(feature);
   const listEl = document.createElement("li");
-  listEl.innerHTML = `<span>${feature.name}</span> 
-    <button  class="btn btn-light" id="list__btn--zoom@${feature.name}"><i class="fa fa-map id="map-icon"></i></button>
-    <button class="btn btn-light" id="list__btn--info@${feature.name}"><i class="fa fa-chevron-circle-down" id="arrow-icon"></i></button>`;
+  listEl.innerHTML = `<span>${feature.name}</span> <div class="buttonzoom__wrapper">
+    <button  class="btn btn-light btn__zoom" id="list__btn--zoom@${feature.name}"><i class="fas fa-map-marked-alt" id="map-icon"></i></button></div>
+    <div class="buttoninfo__wrapper"><button class="btn btn-light" class="btn__info" id="list__btn--info@${feature.name}"><i class="fa fa-chevron-circle-down" id="arrow-icon"></i></button></div>`;
   // const listCont = document.createElement("span")
   // listEl.appendChild("span")
+  listEl.id = `base-${feature.id}`
+  // console.log(feature);
   document
     .getElementsByClassName(
       "list-group-item list-group-item-action list-group-item-secondary"
@@ -108,22 +114,31 @@ map.once("rendercomplete", function(event) {
     .addEventListener("click", e => {
       listEventHandler(e);
     });
-  // console.log(features)
-  // console.log(simpleFeatures)
 });
 
+
+
+
 map.on("singleclick", function(evt) {
-  // overlay.features(vectorLayer)
   var coordinate = evt.coordinate;
   const properties = map.getFeaturesAtPixel(evt.pixel)[0].getProperties();
   content.innerHTML = `<span class="popup_content_text"> Nazwa: ${properties.name} <br>
                         Adres: ${properties.address} <br> </span>`;
   overlay.setPosition(coordinate);
-  // if (vectorLayer !== null) {
-  // vectorLayer.view
-  // evt.view
-  // }
+  var listEl = document.getElementById(`base-${properties.id}`)
+  listEl.scrollIntoView({behavior: "smooth", block: "center"})
+  listEl.style.backgroundColor = "rgba(30, 60, 0, 0.48)"
 });
+
+
+
+map.on('pointermove', function(e) {
+  var pixel = map.getEventPixel(e.originalEvent);
+  var hit = map.hasFeatureAtPixel(pixel);
+  map.getViewport().style.cursor = hit ? 'pointer' : ''
+});
+
+
 
 function hideList() {
 document.getElementsByClassName("feature__wrapper")[0].style.display = "none"
@@ -131,7 +146,6 @@ document.getElementsByClassName("list-group-item list-group-item-action list-gro
 }
 
 function openInfo(feature) {
-  // console.log(feature)
   document.getElementsByClassName("feature__wrapper")[0].style.display =
     "inline";
   document.getElementsByClassName(
@@ -140,7 +154,6 @@ function openInfo(feature) {
   const baseName = simpleFeatures.find(function(simpleFeature) {
     return simpleFeature.name == feature;
   });
-  // console.log(baseName)
   for (const property in baseName) {
     if (property != "geometry") {
       const baseElement = document.createElement("li");
@@ -151,5 +164,7 @@ function openInfo(feature) {
     }
   }
 }
+
+
 
 
