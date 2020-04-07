@@ -11,7 +11,6 @@
 
 :root {
   --main-color: #336600;
-  --dark-green: #336600;
   }
 
 
@@ -22,8 +21,6 @@ body {
 }
 
 .navbar_title {
-  position: fixed;
-  margin-left: 6%;
   color: white;
   font-size: 1.7em;
   font-weight: 500;
@@ -33,12 +30,15 @@ body {
 
 
 .navbar {
-  background-color: #336600;
+  position: relative;
+  background-color: var(--main-color);
   padding-top: 0;
   padding-bottom: 0;
   z-index: 9999;
   box-shadow: 0 5px 8px -4px rgba(0,0,0,.5);
   height: 80px;
+  display: grid !important;
+  grid-template-columns: 7% 93%;
 }
 
 
@@ -69,7 +69,7 @@ body {
     padding: 0px;
     background-color: var;
     border-radius: 5px;
-    border: var(--zhp-dark-green);
+    border: var(--main-color);
     bottom: 2px;
     left: -50px;
     min-width: 280px;
@@ -93,7 +93,7 @@ body {
 }
 
 .popup_content {
-  background-color: var(--dark-green);
+  background-color: var(--main-color);
   height: 40%;
   display: flex;
   font-size: 1.2em;
@@ -126,10 +126,6 @@ body {
   padding-right: 7px;
 }
 
-
-/* .ol-zoom.ol-unselectable.ol-control {
-background-color: var(--button-color);
-} */
 
 .ol-zoom-in {
 background-color: rgba(61, 61, 61, 0.8) !important;
@@ -169,7 +165,7 @@ grid-template-columns: 3fr 0.5fr 0.5fr;
 }
 
 .list-group-item.list-group-item-action:hover {
-  background: var(--zhp-dark-green);
+  background: var(--main-color);
   }
 
 
@@ -185,6 +181,16 @@ transform: scale(1.06);
   width: 100%;
   background-color: var(--main-color);
 }
+
+.addBase__wrapper {
+  display: none;
+  position: absolute !important;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-color);
+}
+
 
 .feature__info {
   background-color: var(--main-color);
@@ -290,8 +296,11 @@ background: var(--main-color);
 }
 
 #go_back {
-  font-size: 1.6em; 
+  font-size: 1.6em;
   color: white;
   padding-bottom: 0;
 }
 
+.active {
+  background-color: rgba(30, 60, 0, 0.48) !important;
+}

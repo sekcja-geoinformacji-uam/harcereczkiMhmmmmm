@@ -1,3 +1,23 @@
+var dict = {
+  accommodation: "Dostępne formy zakwaterowania na bazie",
+  activities: "Formy, które można zorganizować na bazie",
+  address: "Adres bazy",
+  availability: "Baza jest czynna",
+  banner: "Chorągiew",
+  base_features: "Usługi bazy",
+  location: "Położenie bazy",
+  name: "Nazwa bazy/ośrodka",
+  other: "Inne",
+  phone: "Kontaktowy numer telefonu",
+  possibilities: "Możliwości programowe bazy",
+  province: "Województwo",
+  sanitary: "Zaplecze sanitarne",
+  terrain: "Charakterystyka terenu",
+  email: "Kontaktowy adres e-mail",
+  id: "Id"
+}
+
+
 var style = new ol.style.Style({
   image: new ol.style.Icon({
     src: "./assets/icons/camping-tent1.svg",
@@ -12,8 +32,6 @@ var style = new ol.style.Style({
     // })
   })
 });
-
-
 
 
 var vectorLayer = new ol.layer.Vector({
@@ -89,8 +107,8 @@ function zoomToFeatureByID(id) {
 function newElem(feature) {
   const listEl = document.createElement("li");
   listEl.innerHTML = `<span>${feature.name}</span> <div class="buttonzoom__wrapper">
-    <button  class="btn btn-light btn__zoom" id="list__btn--zoom@${feature.name}"><i class="fas fa-map-marked-alt" id="map-icon"></i></button></div>
-    <div class="buttoninfo__wrapper"><button class="btn btn-light" class="btn__info" id="list__btn--info@${feature.name}"><i class="fa fa-chevron-circle-down" id="arrow-icon"></i></button></div>`;
+    <button  class="btn btn-light btn__zoom" id="list__btn--zoom@${feature.name}" data-toggle="tooltip" data-placement="top" title="Pokaż na mapie"><i class="fas fa-map-marked-alt" id="map-icon"></i></button></div>
+    <div class="buttoninfo__wrapper"><button class="btn btn-light" class="btn__info" id="list__btn--info@${feature.name}" data-toggle="tooltip" data-placement="top" title="Pokaż więcej"><i class="fa fa-chevron-circle-down" id="arrow-icon"></i></button></div>`;
   // const listCont = document.createElement("span")
   // listEl.appendChild("span")
   listEl.id = `base-${feature.id}`
@@ -127,7 +145,10 @@ map.on("singleclick", function(evt) {
   overlay.setPosition(coordinate);
   var listEl = document.getElementById(`base-${properties.id}`)
   listEl.scrollIntoView({behavior: "smooth", block: "center"})
-  listEl.style.backgroundColor = "rgba(30, 60, 0, 0.48)"
+  const activeList = document.getElementsByClassName('active')
+  const jsList = Array.from(activeList)
+  jsList[0].classList.removeI('active')
+  listEl.className.add = "active"
 });
 
 
@@ -157,7 +178,7 @@ function openInfo(feature) {
   for (const property in baseName) {
     if (property != "geometry") {
       const baseElement = document.createElement("li");
-      baseElement.innerHTML = `${property}: ${baseName[property]}`;
+      baseElement.innerHTML = `${dict[property]}: ${baseName[property]}`;
       document
         .getElementsByClassName("feature__info")[0]
         .appendChild(baseElement);
@@ -165,6 +186,17 @@ function openInfo(feature) {
   }
 }
 
+function hideAddBaseList() {
+  document.getElementsByClassName("addBase__wrapper")[0].style.display = "none"
+  document.getElementsByClassName("features__wrapper")[0].style.display = "block"
+  }
 
+
+function addBase(feature) {
+  document.getElementsByClassName("addBase__wrapper")[0].style.display = "inline";
+  document.getElementsByClassName(
+    "features__wrapper"
+  )[0].style.display = "none";
+}
 
 
