@@ -90,7 +90,7 @@ function listEventHandler(e) {
     openInfo(id);
   }
 }
-
+//pusty
 function zoomToFeatureByID(id) {
   const feature = vectorLayer
     .getSource()
