@@ -14,9 +14,8 @@ var dict = {
   sanitary: "Zaplecze sanitarne",
   terrain: "Charakterystyka terenu",
   email: "Kontaktowy adres e-mail",
-  id: "Id"
-}
-
+  id: "Id",
+};
 
 var style = new ol.style.Style({
   image: new ol.style.Icon({
@@ -136,12 +135,12 @@ map.on("singleclick", function (evt) {
   content.innerHTML = `<span class="popup_content_text"> Nazwa: ${properties.name} <br>
                         Adres: ${properties.address} <br> </span>`;
   overlay.setPosition(coordinate);
-  var listEl = document.getElementById(`base-${properties.id}`)
-  listEl.scrollIntoView({behavior: "smooth", block: "center"})
-  const activeList = document.getElementsByClassName('active')
-  const jsList = Array.from(activeList)
-  jsList[0].classList.removeI('active')
-  listEl.className.add = "active"
+  var listEl = document.getElementById(`base-${properties.id}`);
+  listEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  const activeList = document.getElementsByClassName("active");
+  const jsList = Array.from(activeList);
+  jsList[0].classList.removeI("active");
+  listEl.className.add = "active";
 });
 
 map.on("pointermove", function (e) {
@@ -157,19 +156,19 @@ function hideList() {
   )[0].style.display = "block";
 }
 
-function openInfo(feature) {
+function openInfo(id) {
   document.getElementsByClassName("feature__wrapper")[0].style.display =
     "inline";
   document.getElementsByClassName(
     "list-group-item list-group-item-action list-group-item-secondary"
   )[0].style.display = "none";
-  const baseName = simpleFeatures.find(function (simpleFeature) {
-    return simpleFeature.name == feature;
+  const feature = simpleFeatures.find(function (simpleFeature) {
+    return simpleFeature.id == id;
   });
-  for (const property in baseName) {
+  for (const property in feature) {
     if (property != "geometry") {
       const baseElement = document.createElement("li");
-      baseElement.innerHTML = `${dict[property]}: ${baseName[property]}`;
+      baseElement.innerHTML = `${dict[property]}: ${feature[property]}`;
       document
         .getElementsByClassName("feature__info")[0]
         .appendChild(baseElement);
@@ -178,16 +177,16 @@ function openInfo(feature) {
 }
 
 function hideAddBaseList() {
-  document.getElementsByClassName("addBase__wrapper")[0].style.display = "none"
-  document.getElementsByClassName("features__wrapper")[0].style.display = "block"
-  }
-
+  document.getElementsByClassName("addBase__wrapper")[0].style.display = "none";
+  document.getElementsByClassName("features__wrapper")[0].style.display =
+    "block";
+}
 
 function showAddBaseList(feature) {
-  document.getElementsByClassName("addBase__wrapper")[0].style.display = "inline";
-  document.getElementsByClassName(
-    "features__wrapper"
-  )[0].style.display = "none";
+  document.getElementsByClassName("addBase__wrapper")[0].style.display =
+    "inline";
+  document.getElementsByClassName("features__wrapper")[0].style.display =
+    "none";
   const baseName = simpleFeatures.find(function (simpleFeature) {
     return simpleFeature.name == feature;
   });
@@ -195,7 +194,9 @@ function showAddBaseList(feature) {
     if (property != "geometry") {
       const formLabel = document.createElement("label");
       formLabel.innerHTML = `${dict[property]}`;
-      document.getElementsByClassName("addBase__form")[0].appendChild(formLabel);
-  }
+      document
+        .getElementsByClassName("addBase__form")[0]
+        .appendChild(formLabel);
+    }
   }
 }
