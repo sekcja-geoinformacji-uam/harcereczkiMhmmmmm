@@ -139,8 +139,9 @@ map.on("singleclick", function (evt) {
   listEl.scrollIntoView({ behavior: "smooth", block: "center" });
   const activeList = document.getElementsByClassName("active");
   const jsList = Array.from(activeList);
-  jsList[0].classList.removeI("active");
-  listEl.className.add = "active";
+  if (jsList[0]) {
+    jsList.classList.remove("active");}
+  listEl.classList.add("active");
 });
 
 map.on("pointermove", function (e) {
