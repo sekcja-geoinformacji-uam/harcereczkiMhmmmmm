@@ -85,9 +85,9 @@ function getProp(feature) {
 function listEventHandler(e) {
   const { target } = e;
   const [name, id] = target.id.split("@");
-  if (name === "list__btn--zoom" || name === "map-icon") {
+  if (name === "list__btn--zoom" || name === "zoom-icon") {
     zoomToFeatureByID(id);
-  } else if (name === "list__btn--info" || name === "arrow-icon") {
+  } else if (name === "list__btn--info" || name === "info-icon") {
     openInfo(id);
   }
 }
@@ -106,12 +106,9 @@ function zoomToFeatureByID(id) {
 function newElem(feature) {
   const listEl = document.createElement("li");
   listEl.innerHTML = `<span>${feature.name}</span> <div class="buttonzoom__wrapper">
-    <button  class="btn btn-light btn__zoom" id="list__btn--zoom@${feature.id}"><i class="fas fa-map-marked-alt" id="map-icon@${feature.id}"></i></button></div>
-    <div class="buttoninfo__wrapper"><button class="btn btn-light" class="btn__info" id="list__btn--info@${feature.id}"><i class="fa fa-chevron-circle-down" id="arrow-icon@${feature.id}"></i></button></div>`;
-  // const listCont = document.createElement("span")
-  // listEl.appendChild("span")
+    <button  class="btn btn-light btn__zoom" id="list__btn--zoom@${feature.id}"><i class="fas fa-search-plus" id="zoom-icon@${feature.id}"></i></button></div>
+    <div class="buttoninfo__wrapper"><button class="btn btn-light" class="btn__info" id="list__btn--info@${feature.id}"><i class="fas fa-info-circle" id="info-icon@${feature.id}"></i></button></div>`;
   listEl.id = `base-${feature.id}`;
-  // console.log(feature);
   document
     .getElementsByClassName(
       "list-group-item list-group-item-action list-group-item-secondary"
@@ -186,11 +183,19 @@ function hideAddBaseList() {
   }
 
 
-function addBase(feature) {
+function showAddBaseList(feature) {
   document.getElementsByClassName("addBase__wrapper")[0].style.display = "inline";
   document.getElementsByClassName(
     "features__wrapper"
   )[0].style.display = "none";
+  const baseName = simpleFeatures.find(function (simpleFeature) {
+    return simpleFeature.name == feature;
+  });
+  for (const property in baseName) {
+    if (property != "geometry") {
+      const formLabel = document.createElement("label");
+      formLabel.innerHTML = `${dict[property]}`;
+      document.getElementsByClassName("addBase__form")[0].appendChild(formLabel);
+  }
+  }
 }
-
-

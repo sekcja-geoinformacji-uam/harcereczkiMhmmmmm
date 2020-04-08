@@ -121,7 +121,7 @@ body {
 
 .btn.btn-light {
   width: fit-content;
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   padding-left: 7px;
   padding-right: 7px;
 }
@@ -269,14 +269,11 @@ background: var(--main-color);
 }
 
 
-
-
-
-#map-icon {
+#zoom-icon {
   font-size: 1.6em;
 }
 
-#arrow-icon {
+#info-icon {
   font-size: 1.6em;
 }
 
