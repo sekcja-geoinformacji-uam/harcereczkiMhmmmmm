@@ -90,7 +90,7 @@ function listEventHandler(e) {
     openInfo(id);
   }
 }
-//pusty
+
 function zoomToFeatureByID(id) {
   const feature = vectorLayer
     .getSource()
@@ -140,7 +140,7 @@ map.on("singleclick", function (evt) {
   const activeList = document.getElementsByClassName("active");
   const jsList = Array.from(activeList);
   if (jsList[0]) {
-    jsList.classList.remove("active");}
+    jsList[0].classList.remove("active");}
   listEl.classList.add("active");
 });
 
@@ -157,16 +157,19 @@ function hideList() {
   )[0].style.display = "block";
 }
 
+
 function openInfo(id) {
   document.getElementsByClassName("feature__wrapper")[0].style.display =
     "inline";
   document.getElementsByClassName(
     "list-group-item list-group-item-action list-group-item-secondary"
   )[0].style.display = "none";
+  const infoList = document.getElementsByClassName('feature__info')
+  infoList[0].innerHTML = ''
   const feature = simpleFeatures.find(function (simpleFeature) {
     return simpleFeature.id == id;
   });
-  for (const property in feature) {
+  for (property in feature) {
     if (property != "geometry") {
       const baseElement = document.createElement("li");
       baseElement.innerHTML = `${dict[property]}: ${feature[property]}`;
@@ -183,21 +186,37 @@ function hideAddBaseList() {
     "block";
 }
 
-function showAddBaseList(feature) {
+function showAddBaseList(id) {
   document.getElementsByClassName("addBase__wrapper")[0].style.display =
     "inline";
   document.getElementsByClassName("features__wrapper")[0].style.display =
     "none";
-  const baseName = simpleFeatures.find(function (simpleFeature) {
-    return simpleFeature.name == feature;
+  const baseList = document.getElementsByClassName('addBase__form')
+  baseList[0].innerHTML = ''
+  const feature = simpleFeatures.find(function (simpleFeature) {
+    return simpleFeature.id == id;
   });
-  for (const property in baseName) {
+  for (property in feature) {
     if (property != "geometry") {
       const formLabel = document.createElement("label");
-      formLabel.innerHTML = `${dict[property]}`;
+      formLabel.innerHTML = dict[property];
+      formLabel.id = feature.id
       document
         .getElementsByClassName("addBase__form")[0]
         .appendChild(formLabel);
     }
   }
 }
+
+
+// function newFormElement (feature) {
+//   const property = feature.getProperties
+//   if (property != "geometry") {
+//     const formLabel = document.createElement("label");
+//     formLabel.innerHTML = `<p>${dict[property]}:</p>`
+//     formLabel.id = `p-${feature.id}`;
+//     document.getElementsByClassName("addBase__form")[0].appendChild(formLabel);
+// }}
+
+
+

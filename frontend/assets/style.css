@@ -296,8 +296,18 @@ background: var(--main-color);
   font-size: 1.6em;
   color: white;
   padding-bottom: 0;
+  position: fixed;
 }
 
 .active {
   background-color: rgba(30, 60, 0, 0.48) !important;
+}
+
+.p121 {
+  background-color: var(--main-color);
+  padding: 10px 20px;
+  margin: 0;
+  transition: .5s;
+  color: white;
+  text-shadow: 1px 2px 3px #000000;
 }
