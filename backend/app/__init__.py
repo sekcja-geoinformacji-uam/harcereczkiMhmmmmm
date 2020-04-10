@@ -38,8 +38,8 @@ def create_app(config_name='development'):
             database.close()
         return response
 
-    @app.route('/suchodolski')
-    def suchodolski_welcome():
+    @app.route('/')
+    def index():
         return render_template('index.html')
 
     from .routes import mod_routes
