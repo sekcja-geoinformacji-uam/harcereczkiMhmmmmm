@@ -1,4 +1,4 @@
-import json
+import json, hashlib
 from flask import Blueprint, request, jsonify, current_app
 from peewee import fn, DataError
 from .models import Camps
@@ -53,19 +53,18 @@ def post_feature():
     data = request.get_json(force=True)
     if not data:
         return jsonify({'message': 'Nie przesłano danych'}), 400
+    password = data.get('password')
+    if not password:
+        return jsonify({'message': 'Brak hasła'}), 403
+    hash_pass = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), current_app.config['SECRET_KEY'], 100000)
+    if hash_pass != current_app.config['UPASS']:
+        return jsonify({'message': 'Podano błędne hasło'}), 401
     geometry = data.get('geometry')
     if not geometry: 
         return jsonify({'message': 'Nie przesłano geometrii'}), 400
     try:
         data['geom'] = fn.ST_GeomFromEWKT('SRID=%s;%s'%(2180, asShape(data.pop('geometry')).wkt))
         new_feature = Camps.create(**data)
-    except DataError as de: 
+    except DataError as e: 
          return jsonify({'message': f'{e}'}), 400
     return jsonify({'inserted': new_feature.id}), 400
-    
-def replace_keys(dict):
-    new_dict = {}
-    for key, value in dict.items():
-        if fields_map.get(key):
-            new_dict[fields_map.get(key)] = value
-    return new_dict
