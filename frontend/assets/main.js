@@ -193,30 +193,25 @@ function showAddBaseList(id) {
     "none";
   const baseList = document.getElementsByClassName('addBase__form')
   baseList[0].innerHTML = ''
-  const feature = simpleFeatures.find(function (simpleFeature) {
-    return simpleFeature.id == id;
-  });
+  const feature = simpleFeatures[0]
   for (property in feature) {
-    if (property != "geometry") {
+    if (property != "geometry" && property != "id") {
       const formLabel = document.createElement("label");
-      formLabel.innerHTML = dict[property];
-      formLabel.id = feature.id
+      formLabel.innerHTML = `${dict[property]}:`;
+      formLabel.htmlFor = property
       document
         .getElementsByClassName("addBase__form")[0]
         .appendChild(formLabel);
+      const formInput = document.createElement("input")
+      formInput.type = "text"
+      formInput.id = formLabel.htmlFor
+      formInput.name = "property"
+      formInput.className = "form-control"
+      document.getElementsByClassName("addBase__form")[0].appendChild(formInput);
     }
   }
+  const submitButton = document.createElement("input")
+  submitButton.type = "submit"
+  submitButton.value = "Prześlij"
+  document.getElementsByClassName("addBase__form")[0].appendChild(submitButton)
 }
-
-
-// function newFormElement (feature) {
-//   const property = feature.getProperties
-//   if (property != "geometry") {
-//     const formLabel = document.createElement("label");
-//     formLabel.innerHTML = `<p>${dict[property]}:</p>`
-//     formLabel.id = `p-${feature.id}`;
-//     document.getElementsByClassName("addBase__form")[0].appendChild(formLabel);
-// }}
-
-
-
