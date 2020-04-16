@@ -1,67 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"
+      defer
+    ></script>
+    <script type="text/javascript" src="assets/main.js" defer></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" type="text/css"> -->
+    <script
+      src="https://kit.fontawesome.com/04459fd3fc.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>ZHP</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css"
-    type="text/css">
-  <link rel="stylesheet" type="text/css" href="assets/style.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js" defer></script>
-  <script type="text/javascript" src="assets/main.js" defer></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" type="text/css"> -->
-  <script src="https://kit.fontawesome.com/04459fd3fc.js" crossorigin="anonymous"></script>
-  <title>ZHP</title>
-</head>
-
-<body>
-  
-  <nav class="navbar">
-    <a class="navbar-brand" href="#">
-      <img src="assets/Identyfikator_Logo/LogoZHP_PNG_biale.png" alt="Logo" style="width:50px;">
-    </a>
-    <span class="navbar_title">Katalog Baz Harcerskich</span>
-  </nav>
-  <div class="wrapper">
-    <div class="sidebar">
-      <div class="features__wrapper">
-        <button class="btn btn-light" id ="add_base" onclick="showAddBaseList()">Dodaj nową bazę</button> 
-        <ul class="list-group-item list-group-item-action list-group-item-secondary">
-        </ul>
+  <body>
+    <nav class="navbar">
+      <a class="navbar-brand" href="#">
+        <img
+          src="assets/Identyfikator_Logo/LogoZHP_PNG_biale.png"
+          alt="Logo"
+          style="width: 50px;"
+        />
+      </a>
+      <span class="navbar_title">Katalog Baz Harcerskich</span>
+    </nav>
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="features__wrapper">
+          <button
+            class="btn btn-light"
+            id="add_base"
+            onclick="showAddBaseList()"
+          >
+            Dodaj nową bazę
+          </button>
+          <ul
+            class="list-group-item list-group-item-action list-group-item-secondary"
+          ></ul>
+        </div>
+        <div class="feature__wrapper">
+          <button class="btn btn light" id="go_back" onclick="hideList()">
+            <i class="fa fa-chevron-left" class="go_back_icon"></i>
+          </button>
+          <ul class="feature__info"></ul>
+        </div>
+        <div class="addBase__wrapper">
+          <button
+            class="btn btn light"
+            id="go_back"
+            onclick="hideAddBaseList()"
+          >
+            <i class="fa fa-chevron-left" class="go_back_icon"></i>
+          </button>
+          <form class="addBase__form" target="output_frame"></form>
+        </div>
       </div>
-     <div class="feature__wrapper">
-       <button class="btn btn light" id="go_back" onclick="hideList()"><i class="fa fa-chevron-left" class="go_back_icon"></i></button>
-     <ul class="feature__info">
-     </ul>
+      <div id="map" class="map"></div>
+      <div id="popup" class="ol-popup">
+        <div class="popup_content">
+          <span class="popup_header"> Dane dotyczące bazy</span>
+          <button
+            type="button"
+            id="popup-closer"
+            class="ol-popup-closer"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="popup-content"></div>
+      </div>
     </div>
-    <div class="addBase__wrapper">
-      <button class="btn btn light" id="go_back" onclick="hideAddBaseList()"><i class="fa fa-chevron-left" class="go_back_icon"></i></button> 
-      <form class="addBase__form" method="post" action="http://3.120.210.65:5000/">
-      </form>
-    </div>
-    </div>
-    <div id="map" class="map"></div>
-    <div id="popup" class="ol-popup">
-    <div class="popup_content"> <span class="popup_header"> Dane dotyczące bazy</span> <button type="button" id="popup-closer" class="ol-popup-closer" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> </div>
-      <div id="popup-content"></div>
-    </div>
-  </div>
-  <div class="loader"></div>
-</body>
-
+    <div class="loader"></div>
+  </body>
 </html>
