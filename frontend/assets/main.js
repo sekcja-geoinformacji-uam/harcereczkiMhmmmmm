@@ -209,7 +209,8 @@ function openInfo(id) {
   const documentFragment = document.createDocumentFragment();
 
   for (let property in feature) {
-    if (property !== "geometry") {
+    console.log(`openInfo -> property`, property);
+    if (property !== "geometry" && property !== "id") {
       const baseElement = document.createElement("li");
       const baseElementTitle = document.createElement("div");
       baseElementTitle.innerHTML = `${dict[property]}:`;
