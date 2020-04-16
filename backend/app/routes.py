@@ -67,4 +67,4 @@ def post_feature():
         new_feature = Camps.create(**data)
     except DataError as e: 
          return jsonify({'message': f'{e}'}), 400
-    return jsonify({'inserted': new_feature.id}), 400
+    return jsonify({'inserted': new_feature.id}), 200
