@@ -6,6 +6,9 @@ from .config import config
 from .models import database
 from .tools import create_table
 
+cors = CORS()
+
+
 def create_app(config_name='development'):
     ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
     os.chdir(ROOT_DIR)
@@ -31,6 +34,7 @@ def create_app(config_name='development'):
     create_table(database)
 
     app.database = database
+    cors.init_app( app )
 
     @app.after_request
     def after(response):
