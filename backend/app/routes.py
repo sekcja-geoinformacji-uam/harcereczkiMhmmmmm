@@ -63,7 +63,7 @@ def post_feature():
     if not geometry: 
         return jsonify({'message': 'Nie przesłano geometrii'}), 400
     try:
-        data['geom'] = fn.ST_GeomFromEWKT('SRID=%s;%s'%(2180, asShape(data.pop('geometry')).wkt))
+        data['geom'] = fn.ST_GeomFromEWKT('SRID=%s;%s'%(4326, asShape(data.pop('geometry')).wkt))
         new_feature = Camps.create(**data)
     except DataError as e: 
          return jsonify({'message': f'{e}'}), 400
