@@ -74,7 +74,7 @@ var map = new ol.Map({
     new ol.layer.Tile({
       source: new ol.source.XYZ({
         url:
-          "https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FsaWFhYSIsImEiOiJjazJzd3cwNXowcGJmM2RudnNiaXYyOHU1In0.P2EP-Xewl1qp3onIMwTo7w",
+          "https://c.tile.openstreetmap.pl/osmapa.pl/{z}/{x}/{y}.png",
       }),
     }),
     vectorLayer,
