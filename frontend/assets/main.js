@@ -277,7 +277,7 @@ function showAddBaseList(id) {
   baseList[0].innerHTML = "";
   const feature = simpleFeatures[0];
   const addBaseForm = document.getElementsByClassName("addBase__form")[0];
-
+  const buttonDiv = document.createElement("div")
   const addBaseButton = document.createElement("input");
   addBaseButton.addEventListener("click", () => {
     draw.setActive(true);
@@ -285,7 +285,9 @@ function showAddBaseList(id) {
   });
   addBaseButton.type = "button";
   addBaseButton.value = "Dodaj bazę";
-  addBaseForm.appendChild(addBaseButton);
+  addBaseButton.id = "add_base"
+  addBaseButton.className = "btn btn-light"
+  buttonDiv.appendChild(addBaseButton);
 
   const removeBaseButton = document.createElement("input");
   removeBaseButton.addEventListener("click", () => {
@@ -294,7 +296,11 @@ function showAddBaseList(id) {
   });
   removeBaseButton.type = "button";
   removeBaseButton.value = "Usuń bazę";
-  addBaseForm.appendChild(removeBaseButton);
+  removeBaseButton.className = "btn btn-light"
+  removeBaseButton.id = "remove_base"
+  buttonDiv.appendChild(removeBaseButton);
+  addBaseForm.appendChild(buttonDiv)
+
 
   for (property in feature) {
     if (property != "geometry" && property != "id") {
@@ -327,7 +333,8 @@ function showAddBaseList(id) {
   const submitButton = document.createElement("input");
   submitButton.type = "submit";
   submitButton.value = "Prześlij";
-
+  submitButton.className = "btn btn-light"
+  submitButton.id = "submit_button"
   submitButton.addEventListener("click", (e) => {
     const formData = new FormData(addBaseForm);
 

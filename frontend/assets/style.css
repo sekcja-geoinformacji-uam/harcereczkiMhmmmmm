@@ -294,6 +294,24 @@ background: var(--main-color);
   transform: scale(1.06);
 }
 
+#remove_base {
+  font-size: 1.1em;
+  background-color: var(--main-color);
+  color: white;
+  text-shadow: 1px 2px 3px #000000;
+  margin-left: 5%;
+  margin-top: 3%;
+  transition: .5s;
+  border-color: #f5f5f5ab;
+  position: sticky;
+}
+
+#remove_base:hover {
+  transform: scale(1.06);
+}
+
+
+
 #go_back {
   font-size: 1.6em;
   color: white;
@@ -302,7 +320,7 @@ background: var(--main-color);
 }
 
 .active {
-  background-color: rgba(30, 60, 0, 0.48) !important;
+  background-color: #657917d4 !important;
 }
 
 .addBase__wrapper {
@@ -314,7 +332,7 @@ background: var(--main-color);
 
 .addBase__form {
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   width: 80%;
   border-collapse: separate;
   margin: auto;
@@ -345,25 +363,25 @@ label {
 }
 
 
-input[type=submit] {
-  background-color: rgba(245, 245, 245, 0.91);
-  color: rgb(0, 0, 0);
-  display: block;
-  width: fit-content;
-  height: calc(1.5em + .75rem + 2px);
-  padding: .375rem .75rem;
-  font-size: 1.3rem;
-  font-weight: 400;
-  line-height: 1.5;
-  background-clip: padding-box;
-  border: 2px solid #ced4da;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  margin-top: 15%;
-  transition: .5s;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+#submit_button {
+  font-size: 1.1em;
+    background-color: var(--main-color);
+    color: white;
+    text-shadow: 1px 2px 3px #000000;
+    margin-top: 7%;
+    transition: .5s;
+    border-color: #f5f5f5ab;
+    position: sticky;
 }
 
-input[type=submit]:hover {
+#submit_button:hover {
   transform: scale(1.06);
+  font-size: 1.1em;
+    background-color: var(--main-color);
+    color: white;
+    text-shadow: 1px 2px 3px #000000;
+    margin-top: 7%;
+    transition: .5s;
+    border-color: #f5f5f5ab;
+    position: sticky;
 }
