@@ -7,25 +7,6 @@ from shapely.geometry import asShape
 
 mod_routes = Blueprint('routes', __name__)
 
-fields_map = {
-    'Chorągiew': 'banner',
-    'Nazwa bazy/ośrodka': 'name',
-    'Województwo na terenie którego mieści się baza.': 'province',
-    'Adres bazy': 'address',
-    'Kontaktowy adres e-mail': 'email',
-    'Kontaktowy numer telefonu'	: 'phone',
-    'Baza jest czynna:': 'availability',
-    'Formy, które można zorganizować na bazie:': 'activities',
-    'Położenie bazy:': 'location',
-    'Charakterystyka terenu': 'terrain',
-    'Dostępne formy zakwaterowania na bazie:': 'accommodation',
-    'Zaplecze sanitarne:': 'sanitary',
-    'Usługi bazy:': 'base_features',
-    'Możliwości programowe bazy:': 'possibilities',
-    'Inne': 'other'
-}
-
-
 @mod_routes.route('/features')
 def get_features():
     rs = Camps.select(
