@@ -2,8 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
-backend/app/local_config.py
 
+#Apka
+backend/app/local_config.py
+backend/Pipfile
 # C extensions
 *.so
 
