@@ -34,7 +34,7 @@ var style2 = new ol.style.Style({
 var vectorLayer = new ol.layer.Vector({
   name: "features",
   source: new ol.source.Vector({
-    url: "http://3.120.210.65:5000/features",
+    url: "http://3.120.210.65/features",
     format: new ol.format.GeoJSON({
       dataProjection: "EPSG:4326",
       featureProjection: "EPSG:3857",
@@ -243,7 +243,7 @@ function reloadFeatures() {
   var req = new XMLHttpRequest();
   req.open(
     "GET",
-    "http://3.120.210.65:5000/features",
+    "http://3.120.210.65/features",
     true
   ); /* Argument trzeci, wartość true, określa, że żądanie ma być asynchroniczne */
   req.onload = function (aEvt) {
@@ -357,7 +357,7 @@ function showAddBaseList(id) {
     var json = JSON.stringify({ ...object, geometry });
 
     var req = new XMLHttpRequest();
-    req.open("POST", "http://3.120.210.65:5000/features", true);
+    req.open("POST", "http://3.120.210.65/features", true);
     req.onload = function (oEvent) {
       if (req.status === 200) {
         drawLayer.getSource().clear();
