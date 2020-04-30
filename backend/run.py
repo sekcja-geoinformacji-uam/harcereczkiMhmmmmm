@@ -5,4 +5,4 @@ app = create_app('production')
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug = True)
+    app.run(host=app.config['SERVER_ADDRESS'], port=app.config['SERVER_PORT'])
