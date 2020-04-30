@@ -19,16 +19,15 @@ var dict = {
 
 var style = new ol.style.Style({
   image: new ol.style.Icon({
-    src: "./assets/icons/camping-tent1.svg",
+    src: "./assets/icons/tent.svg",
     scale: 0.06,
-    // radius: 7,
-    // fill: new ol.style.Fill({
-    //   color: "#588463"
-    // }),
-    // stroke: new ol.style.Stroke({
-    //   color: "black",
-    //   width: 1
-    // })
+  }),
+});
+
+var style2 = new ol.style.Style({
+  image: new ol.style.Icon({
+    src: "./assets/icons/red_tent.svg",
+    scale: 0.06,
   }),
 });
 
@@ -66,7 +65,7 @@ var source = new ol.source.Vector({ wrapX: false });
 
 var drawLayer = new ol.layer.Vector({
   source: source,
-  style: style,
+  style: style2,
 });
 
 var map = new ol.Map({
@@ -93,7 +92,7 @@ function addInteraction() {
   draw = new ol.interaction.Draw({
     source: drawLayer.getSource(),
     type: "Point",
-    style: style,
+    style: style2,
   });
   draw.on("drawend", () => {
     draw.setActive(false);
