@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve zhp camps
+After=network.target
+
+[Service]
+User=USER
+Group=www-data
+WorkingDirectory=/home/USER/zhp_camps
+Environment="PATH=/home/USER/zhp_camps/.venv/bin"
+ExecStart=/home/USER/zhp_camps/.venv/bin/uwsgi --ini zhp_camps.ini
+
+[Install]
+WantedBy=multi-user.target
