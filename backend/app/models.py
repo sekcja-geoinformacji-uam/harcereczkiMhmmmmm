@@ -1,4 +1,4 @@
-from peewee import Model, Field, PrimaryKeyField, TextField
+from peewee import Model, Field, PrimaryKeyField, TextField, IntegerField
 from playhouse.postgres_ext import PostgresqlExtDatabase
 
 
@@ -38,6 +38,7 @@ class Camps(BaseModel):
     possibilities = TextField(null=True)
     other = TextField(null=True)
     geom = GeometryField(null=True)
+    teryt = IntegerField(null=True)
     
     class Meta:
         db_table = 'camps'

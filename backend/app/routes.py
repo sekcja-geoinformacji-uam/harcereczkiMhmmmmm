@@ -19,7 +19,6 @@ def get_features():
         geom = row.pop('geometry')
         features.append({
             "type": "Feature",
-            "id": row.get('id'),
             "geometry": json.loads(geom),
             "properties": row
         })

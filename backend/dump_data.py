@@ -17,7 +17,6 @@ if __name__ == '__main__':
         geom = row.pop('geometry')
         features.append({
             "type": "Feature",
-            "id": row.get('id'),
             "geometry": json.loads(geom),
             "properties": row
         })
