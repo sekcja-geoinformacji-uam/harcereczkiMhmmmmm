@@ -58,33 +58,51 @@
     </nav>
     <div class="wrapper">
       <div class="sidebar">
-        <div class="features__wrapper">
-          <button
-            class="btn btn-light"
-            id="add_base"
-            onclick="showAddBaseList()"
-          >
-            Dodaj nową bazę
-          </button>
-          <ul
-            class="list-group-item list-group-item-action list-group-item-secondary"
-          ></ul>
+        <div class="loader__wrapper">
+          <div class="loader"></div>
         </div>
-        <div class="feature__wrapper">
-          <button class="btn btn light" id="go_back" onclick="hideList()">
-            <i class="fa fa-chevron-left" class="go_back_icon"></i>
-          </button>
-          <ul class="feature__info"></ul>
-        </div>
-        <div class="addBase__wrapper">
-          <button
-            class="btn btn light"
-            id="go_back"
-            onclick="hideAddBaseList()"
-          >
-            <i class="fa fa-chevron-left" class="go_back_icon"></i>
-          </button>
-          <form class="addBase__form" target="output_frame"></form>
+        <div class="sidebar__content" style="display: none;">
+          <div class="features__wrapper">
+            <div class="features__buttons">
+              <button
+                class="btn btn-light"
+                id="add__base"
+                onclick="showAddBaseList()"
+              >
+                Dodaj bazę
+              </button>
+              <div class="dropdown">
+                <select class="form-control" id="wojSelect">
+                  <option value="" selected>Wybierz województwo</option>
+                  <!-- <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option> -->
+                </select>
+              </div>
+            </div>
+
+            <ul
+              class="list-group-item list-group-item-action list-group-item-secondary"
+            ></ul>
+          </div>
+          <div class="feature__wrapper">
+            <button class="btn btn light" id="go_back" onclick="hideList()">
+              <i class="fa fa-chevron-left" class="go_back_icon"></i>
+            </button>
+            <ul class="feature__info"></ul>
+          </div>
+          <div class="addBase__wrapper">
+            <button
+              class="btn btn light"
+              id="go_back"
+              onclick="hideAddBaseList()"
+            >
+              <i class="fa fa-chevron-left" class="go_back_icon"></i>
+            </button>
+            <form class="addBase__form" target="output_frame"></form>
+          </div>
         </div>
       </div>
       <div id="map" class="map"></div>
@@ -104,6 +122,5 @@
         <div id="popup-content"></div>
       </div>
     </div>
-    <div class="loader"></div>
   </body>
 </html>
