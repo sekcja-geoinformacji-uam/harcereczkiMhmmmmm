@@ -17,6 +17,25 @@ var dict = {
   id: 'Id',
 };
 
+const wojDict = {
+  '02': 'dolnośląskie',
+  '04': 'kujawsko-pomorskie',
+  '06': 'lubelskie',
+  '08': 'lubuskie',
+  '10': 'łódzkie',
+  '12': 'małopolskie',
+  '14': 'mazowieckie',
+  '16': 'opolskie',
+  '18': 'podkarpackie',
+  '20': 'podlaskie',
+  '22': 'pomorskie',
+  '24': 'śląskie',
+  '26': 'świętokrzyskie',
+  '28': 'warmińsko-mazurskie',
+  '30': 'wielkopolskie',
+  '32': 'zachodniopomorskie',
+};
+
 var style = new ol.style.Style({
   image: new ol.style.Icon({
     src: './assets/icons/tent.svg',
@@ -131,6 +150,9 @@ function zoomToFeatureByID(id) {
     });
   const geomExtent = feature.getGeometry().getExtent();
   map.getView().fit(geomExtent, { duration: 1000, maxZoom: 12 });
+  content.innerHTML = `<span class="popup_content_text"> Nazwa: ${feature.get('name')} <br>
+                        Adres: ${feature.get('address')} <br> </span>`;
+  overlay.setPosition(feature.getGeometry().flatCoordinates);
 }
 
 function newElem(feature) {
@@ -309,12 +331,26 @@ function showAddBaseList(id) {
       formLabel.htmlFor = property;
 
       addBaseForm.appendChild(formLabel);
-      const formInput = document.createElement('input');
-      formInput.type = 'text';
-      formInput.id = formLabel.htmlFor;
-      formInput.name = property;
-      formInput.className = 'form-control';
-      addBaseForm.appendChild(formInput);
+      if (property == 'province') {
+        const formInput = document.createElement("select");;
+        formInput.className = 'form-control';
+        formInput.name = property;
+        formInput.id = formLabel.htmlFor;
+
+        for (let i in wojDict) {
+          const option = document.createElement('option');
+          option.innerText = wojDict[i];
+          formInput.appendChild(option);
+        }
+        addBaseForm.appendChild(formInput);
+      } else {
+        const formInput = document.createElement('input');
+        formInput.type = 'text';
+        formInput.id = formLabel.htmlFor;
+        formInput.name = property;
+        formInput.className = 'form-control';
+        addBaseForm.appendChild(formInput);
+      }
     }
   }
 
@@ -377,7 +413,7 @@ function showAddBaseList(id) {
         drawLayer.getSource().clear();
         reloadFeatures();
         hideAddBaseList();
-        alert('Podczas dodawania bazy wystąpił błąd');
+        alert(`Podczas dodawania bazy wystąpił błąd - ${JSON.parse(req.responseText)["message"]}`);
         // oOutput.innerHTML =
         // "Error " +
         // oReq.status +
@@ -402,25 +438,6 @@ map.on('rendercomplete', () => {
 map.once('rendercomplete', () => {
   createList(vectorLayer.getSource().getFeatures());
 });
-
-const wojDict = {
-  '02': 'dolnośląskie',
-  '04': 'kujawsko-pomorskie',
-  '06': 'lubelskie',
-  '08': 'lubuskie',
-  '10': 'łódzkie',
-  '12': 'małopolskie',
-  '14': 'mazowieckie',
-  '16': 'opolskie',
-  '18': 'podkarpackie',
-  '20': 'podlaskie',
-  '22': 'pomorskie',
-  '24': 'śląskie',
-  '26': 'świętokrzyskie',
-  '28': 'warmińsko-mazurskie',
-  '30': 'wielkopolskie',
-  '32': 'zachodniopomorskie',
-};
 
 const dropdownFragment = document.createDocumentFragment();
 
