@@ -150,7 +150,9 @@ function zoomToFeatureByID(id) {
     });
   const geomExtent = feature.getGeometry().getExtent();
   map.getView().fit(geomExtent, { duration: 1000, maxZoom: 12 });
-  content.innerHTML = `<span class="popup_content_text"> Nazwa: ${feature.get('name')} <br>
+  content.innerHTML = `<span class="popup_content_text"> Nazwa: ${feature.get(
+    'name'
+  )} <br>
                         Adres: ${feature.get('address')} <br> </span>`;
   overlay.setPosition(feature.getGeometry().flatCoordinates);
 }
@@ -331,9 +333,9 @@ function showAddBaseList(id) {
       formLabel.htmlFor = property;
 
       addBaseForm.appendChild(formLabel);
-      if (property == 'province') {
-        const formInput = document.createElement("select");;
-        formInput.className = 'form-control';
+      if (property === 'province') {
+        const formInput = document.createElement('select');
+        formInput.className = 'form-control dropdown';
         formInput.name = property;
         formInput.id = formLabel.htmlFor;
 
@@ -413,7 +415,11 @@ function showAddBaseList(id) {
         drawLayer.getSource().clear();
         reloadFeatures();
         hideAddBaseList();
-        alert(`Podczas dodawania bazy wystąpił błąd - ${JSON.parse(req.responseText)["message"]}`);
+        alert(
+          `Podczas dodawania bazy wystąpił błąd - ${
+            JSON.parse(req.responseText)['message']
+          }`
+        );
         // oOutput.innerHTML =
         // "Error " +
         // oReq.status +

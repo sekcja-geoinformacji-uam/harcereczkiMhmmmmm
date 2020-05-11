@@ -415,10 +415,10 @@ label {
   color: red !important;
 } */
 
-#wojSelect option {
+.dropdown option {
   color: grey;
 }
-#wojSelect {
+.dropdown {
   font-size: 1.1em;
   text-shadow: 1px 2px 3px #000000;
 }
