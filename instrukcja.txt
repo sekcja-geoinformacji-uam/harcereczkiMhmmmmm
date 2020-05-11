@@ -1,0 +1,31 @@
+Wymagania:
+ - Python 3.6 lub nowszy wraz z zależnościami z pliku req.txt
+ - PostgreSQL 11 lub nowszy z zainstalowanym rozszerzeniem PostGIS
+ - serwer WWW, wykorzystywany później jako reverse proxy (ja użyłem nginx)
+
+Kroki:
+    1. Utworzenie wirtualnego środowiska języka Python w wersji 3.6 lub wyższej.
+    2. Zainstalowanie zależności z pliku req.txt (backend/req.txt).
+    3. Utworzenie nowej bazy postgresql z rozszerzeniem postgis.
+    4. W pliku config.py (backend/app/config.py) podmiana wartości dla atrybutów:
+        - DBNAME
+        - DBUSER
+        - DBPASS
+        - DBHOST
+        - DBPORT
+    umożliwiających połączenie z nową bazą.
+    5. Przeprowadzenie migracji danych - skrypt migrate.py (backend/migrate.py) z poziomu 
+    wirtualnego środowiska.
+    6. Po pomyślnej migracji w bazie danych powinna zostać utworzona tabela `camps`, która
+    zawiera dane dotyczące baz ZHP.
+    7. W pliku main.js (frontend/assets/main.js) podmiana adresu http://54.93.192.181 na adres 
+    serwera gdzie wystawiana jest aplikacja.
+    8. Uruchomienie aplikacji - tutaj kroki będą się różnić w zależności od serwera WWW, który posłuży jako reverse proxy. 
+    Ja osobiście najczęsciej pracuję z nginx więc to też wybrałem. Dla tego przypadku bardzo dobrym
+    tutorialem jest: https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04
+    Pliki inicjalizacyjny do uWSGI znajduje się już w folderze aplikacji zhp_camps.ini (backend/zhp_camps.ini), natomiast
+    przykładowy plik konfiguracyjny serwisu jest dostępny w deploy/zhp_camps.service. Podmiana ścieżek i przeniesienie pliku
+    do odpowiedniego katalogu (w przypadku np. Ubuntu 18.04 - /etc/systemd/system/) powinno wystarczyć.
+    9. Po odpowiedniej konfiguracji serwera WWW i wystartowaniu serwisu aplikacji, wszystko powinno działać :)
+
+W razie problemów, pytań służę pomocą :D
